@@ -1,0 +1,10 @@
+.active {
+    background-color: #039388 !important;
+}
+.active img, .active .menu-name {
+    filter: brightness(0) invert(1);
+}
+.active .menu-name {
+    font-size: 18px;
+    font-weight: bold !important;
+}
