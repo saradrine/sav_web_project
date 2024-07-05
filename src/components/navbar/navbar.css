@@ -1,0 +1,20 @@
+.navbar-vertical-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scrollText {
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: calc(90%);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* .iconn:hover {
+    padding: 3px;
+    border-radius: 50%;
+    transform: scale(1.005);
+    transition: transform 0.3s ease;
+} */
