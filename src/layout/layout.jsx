@@ -4,7 +4,7 @@ import {Outlet} from "react-router-dom";
 const Layout = () => {
     return (
         <section className="flex">
-            <Sidebar role={'user'} />
+            <Sidebar role={'admin'} />
             <div className="w-full p-8 ">
                 <Outlet />
             </div>
