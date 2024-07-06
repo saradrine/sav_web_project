@@ -12,7 +12,7 @@ import customerSupport from "../../../assets/icons/customer-supportGray.png"
 import user from "../../../assets/icons/user.png"
 import clock from "../../../assets/icons/clockGray.png"
 import useMediaQuery from '@mui/material/useMediaQuery';
-import {CustomGrid} from "../../common/someCustomMaterialComponents.jsx";
+import {CustomGrid} from "../../common/customGrid.jsx";
 import CloseButton from "../../common/closeButton.jsx";
 import * as React from "react";
 

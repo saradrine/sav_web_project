@@ -4,17 +4,14 @@ import {useState} from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
-import {Box, createTheme, DialogActions, ThemeProvider} from "@mui/material";
+import {Box, DialogActions} from "@mui/material";
 import * as PropTypes from "prop-types";
-import Button from "@mui/material/Button";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import * as React from "react";
-import { CustomTextField, StyledStaticDatePicker } from "../../common/someCustomMaterialComponents.jsx";
+import {CustomDatePicker, CustomTextField} from "../../common/customTextAndDateFields.jsx";
 import profession from "../../../assets/icons/profession.png";
 import CloseButton from "../../common/closeButton.jsx";
-import {styled} from "@mui/material/styles";
 
 const AddEmployee = () => {
     const [open, setOpen] = useState(false);
@@ -118,17 +115,14 @@ const AddEmployee = () => {
                         onChange={handleInputChange}
                     />
 
-                    {/*<ThemeProvider theme={newTheme}>*/}
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-
-                            <StyledStaticDatePicker
-                                className="w-full"
-                                label="Date de naissance"
-                                onChange={handleDateChange}
-                                name="dateDeNaissance"
-                            />
-                        </LocalizationProvider>
-                    {/*</ThemeProvider>*/}
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <CustomDatePicker
+                            className="w-full"
+                            label="Date de naissance"
+                            onChange={handleDateChange}
+                            name="dateDeNaissance"
+                        />
+                    </LocalizationProvider>
                 </DialogContent>
                 <DialogActions sx={{paddingRight:3}}>
                     <CustomButton width={'none'} height="40px" borderradius="30px" variant="contained" disableRipple onClick={handleAddAdmin}>

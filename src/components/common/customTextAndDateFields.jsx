@@ -2,23 +2,7 @@ import {Grid, TextField} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 
-export const CustomGrid = ({ children, ...props }) => (
-    <Grid
-        className="overflow-hidden whitespace-nowrap"
-        item
-        xs={12}
-        sx={{
-            display: 'flex',
-            alignItems: 'start',
-            flexDirection: { xs: 'column', sm: 'row' },
-            ...props.sx
-        }}
-        {...props}
-    >
-        {children}
-    </Grid>
-);
-const style= {
+ const style= {
     '& .MuiInputBase-root': {
         borderRadius: '15px',
         height: '50px',
@@ -36,4 +20,4 @@ const style= {
     },
 }
 export const CustomTextField = styled(TextField)(({ theme }) => (style));
-export const StyledStaticDatePicker = styled(DatePicker)(({ theme }) => ({...style, marginTop:'9px'}));
+export const CustomDatePicker = styled(DatePicker)(({ theme }) => ({...style, marginTop:'9px'}));
