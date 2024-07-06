@@ -1,0 +1,13 @@
+.notifications {
+  border-radius: 1.25rem;
+  box-shadow: 0 -7px 15px -7px rgba(0, 0, 0, 0.2),
+    0 7px 15px -7px rgba(0, 0, 0, 0.2), -7px 0 15px -7px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  border-radius: 1.25rem;
+  overflow-y: auto;
+  white-space: nowrap;
+  box-shadow: 0 -1px 10px -7px rgba(0, 0, 0, 0.0),
+    0 1px 10px -7px rgba(0, 0, 0, 0.5), -1px 0 10px -7px rgba(0, 0, 0, 0.5);
+}

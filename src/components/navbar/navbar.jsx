@@ -2,15 +2,18 @@ import { useState, useEffect, useRef } from "react";
 import { Navbar, Typography } from "@material-tailwind/react";
 import logout from "../../assets/icons/logout.png";
 import bell from "../../assets/icons/bell.png";
-// import Notifications from "../notification/notifications";
-// import "./navbar.css";
+import Notifications from "../notification/notifications";
+import "./navbar.css";
 
 function ComplexNavbar() {
   const navbarRef = useRef(null);
+  const notifRef = useRef(null);
   const [navbarHeight, setNavbarHeight] = useState("auto");
   const [isNarrow, setIsNarrow] = useState(false);
   const [showTypography, setShowTypography] = useState(true);
   const [showNotifications, setShowNotifications] = useState(false);
+
+  useOutsideClick(notifRef, () => setShowNotifications(false));
 
   useEffect(() => {
     const adjustNavbar = () => {
@@ -26,6 +29,20 @@ function ComplexNavbar() {
     window.addEventListener("resize", adjustNavbar);
     return () => window.removeEventListener("resize", adjustNavbar);
   }, []);
+
+  function useOutsideClick(ref, callback) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          callback();
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref, callback]);
+  }
 
   const navbarClassName = `fixed bg-white h-auto p-1.5 duration-500 rounded-tl-lg rounded-bl-lg top-8 right-0 ${
     isNarrow ? "navbar-vertical-center" : ""
@@ -58,8 +75,8 @@ function ComplexNavbar() {
             </div>
           )}
           <div className="flex ml-3">
-            <div className="relative flex items-center">
-              <div className="iconn flex justify-center items-center mr-2">
+            <div className="relative flex items-center" ref={notifRef}>
+              <div className="iconn flex-shrink-0 justify-center items-center mr-2">
                 <button
                   onClick={() => setShowNotifications(!showNotifications)}
                   className="iconn"
@@ -67,9 +84,9 @@ function ComplexNavbar() {
                   <img src={bell} alt="Notifications" className="h-8 w-8" />
                 </button>
               </div>
-              {/* {showNotifications && <Notifications />} */}
+              {showNotifications && <Notifications />}
             </div>
-            <div className="iconn flex justify-center items-center ml-2">
+            <div className="iconn flex-shrink-0 justify-center items-center ml-2">
               <button onClick={() => {}}>
                 <img
                   src={logout}
