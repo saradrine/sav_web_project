@@ -1,0 +1,12 @@
+tr.Mui-selected, tr.Mui-selected path{
+    color: #039388 !important;
+    background-color: #03938817  !important;
+}
+
+.css-1whpjm6-MuiToolbar-root{
+    background-color: rgba(3, 147, 136, 0.2) !important;
+    border-radius:  10px;
+}
+.css-byenzh-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track, .Mui-checked .css-jsexje-MuiSwitch-thumb{
+    background-color: #039388 !important;
+}

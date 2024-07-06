@@ -54,6 +54,7 @@ function ComplexNavbar() {
     minWidth: "140px",
     width: "27%",
     height: navbarHeight,
+    zIndex: 1000,
   };
 
   return (
