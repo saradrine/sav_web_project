@@ -11,6 +11,7 @@ import Dashboard from "./pages/admin/dashboard.jsx";
 import Appointments from "./pages/admin/appointments.jsx";
 import Employees from "./pages/admin/employees.jsx";
 import Page404 from "./pages/page404.jsx";
+import ProfilAdmin from './pages/admin/profile.jsx';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
                 <Route path={"/vehicles"} element={<Vehicles />} />
                 <Route path={"/appointments"} element={<Appointments />} />
                 <Route path={"/employees"} element={<Employees />} />
+                <Route path={"/profil"} element={<ProfilAdmin />} />
             </Route>
             <Route path="*" element={<Page404 />} />
         </Routes>
