@@ -1,16 +1,19 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import Modal from "@mui/material/Modal";
 import show from "../assets/icons/show.png";
 import hide from "../assets/icons/hide.png";
 import { Typography } from "@mui/material";
 
-const ChangePasswordPopup = ({ setIsPopupOpen }) => {
+const ChangePasswordPopup = ({ isPopupOpen, setIsPopupOpen }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showAncien, setShowAncien] = useState(false);
   const handleSubmit = () => {
     console.log("submit");
   };
+
+  const handleClose = () => setIsPopupOpen(false);
 
   const toggleShowAncien = () => {
     setShowAncien(!showAncien);
@@ -23,8 +26,9 @@ const ChangePasswordPopup = ({ setIsPopupOpen }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-10">
-      <div className="bg-white px-10 py-7 rounded-[20px] shadow-lg max-w-sm w-full">
+    <Modal open={isPopupOpen} onClose={handleClose}>
+      {/* <div className="fixed inset-0 flex items-center justify-center z-10"> */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-10 py-7 rounded-2xl shadow-lg max-w-sm w-full">
         <div className="text-2xl text-center font-bold">
           Changer le mot de passe
         </div>
@@ -117,7 +121,7 @@ const ChangePasswordPopup = ({ setIsPopupOpen }) => {
           </button>
           <button
             onClick={() => {
-              setIsPopupOpen(false);
+              handleClose();
             }}
             style={{
               boxShadow: "1px 2px 8px rgba(0,0,0,0.25)",
@@ -130,7 +134,8 @@ const ChangePasswordPopup = ({ setIsPopupOpen }) => {
           </button>
         </div>
       </div>
-    </div>
+      {/* </div> */}
+    </Modal>
   );
 };
 

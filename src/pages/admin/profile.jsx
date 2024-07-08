@@ -105,7 +105,10 @@ const ProfilAdmin = () => {
                     </Typography>
                   </button>
                   {isPopupOpen && (
-                    <ChangePasswordPopup setIsPopupOpen={setIsPopupOpen} />
+                    <ChangePasswordPopup
+                      isPopupOpen={isPopupOpen}
+                      setIsPopupOpen={setIsPopupOpen}
+                    />
                   )}
                 </div>
               )}
@@ -209,9 +212,7 @@ const ProfilAdmin = () => {
                     <Typography
                       variant=""
                       className="text-ellipsis text-nowrap overflow-hidden pl-5"
-                      title={
-                        "foulenbenfoulen@gmail.com"
-                      }
+                      title={"foulenbenfoulen@gmail.com"}
                     >
                       foulenbenfoulen@gmail.com
                     </Typography>
