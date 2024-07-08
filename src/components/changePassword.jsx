@@ -141,6 +141,7 @@ const ChangePasswordPopup = ({ isPopupOpen, setIsPopupOpen }) => {
 
 ChangePasswordPopup.propTypes = {
   setIsPopupOpen: PropTypes.func.isRequired,
+  isPopupOpen: PropTypes.bool.isRequired,
 };
 
 export default ChangePasswordPopup;
