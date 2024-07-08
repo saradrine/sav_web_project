@@ -1,9 +1,9 @@
-import { Box, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Box, MenuItem, TextField } from "@mui/material";
 import undo from "../../../assets/icons/undo.png";
 import Typography from "@mui/material/Typography";
 import PropTypes from 'prop-types';
-import AddEmployee from "../employees/addEmployee.jsx";
 import TableType from "../../../utils/enum/tableType.enum.js";
+import CustomSelectField from "../../common/customSelectField.jsx";
 
 export default function FilterControls({ filterCriteria, setFilterCriteria, selectedColumn, setSelectedColumn, resetFilters, columns, tableType }) {
     const handleFilterChange = (e) => {
@@ -21,57 +21,15 @@ export default function FilterControls({ filterCriteria, setFilterCriteria, sele
 
     return (
         <Box className={`flex flex-wrap items-center gap-4 ${tableType === TableType.ADMINS ? 'mt-3':'my-3'}`}>
-            <FormControl
-                variant="outlined"
-                className="w-full sm:w-auto"
-                sx={{
-                    '& .MuiInputLabel-root': {
-                        fontSize: '0.8rem',
-                        color: '#333',
-                        transform: 'translate(14px, 13px) scale(1)',
-                        '&.MuiFormLabel-filled, &.Mui-focused': {
-                            transform: 'translate(14px, -8px) scale(0.85)',
-                            color: '#333',
-                        },
-                    },
-                    '& .MuiOutlinedInput-root': {
-                        '& fieldset': {
-                            borderRadius: '15px',
-                            borderColor: '#dedede',
-                        },
-                        '&:hover fieldset': {
-                            borderColor: '#ECECEC',
-                        },
-                        '&.Mui-focused fieldset': {
-                            borderColor: '#333',
-                        },
-                    },
-                }}
-            >
-                <InputLabel >Sélectionner une colonne</InputLabel>
-                <Select
-                    value={selectedColumn}
-                    onChange={handleColumnSelectChange}
-                    label="Sélectionner une colonne"
-                    className="sm:min-w-[200px] w-full sm:w-auto"
-                    sx={{
-                        height: 43,
-                        '& .MuiSelect-select': {
-                            fontSize: '0.9rem',
-                            transform: 'translate(0, 3px)',
-                        },
-                    }}
-                >
-                    {columns.map((col) => (
-                        <MenuItem key={col.id} value={col.id} className="text-xs" sx={{
-                            fontSize: '0.85rem',
-                        }}>
-                            {col.label}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
-
+            <CustomSelectField label={'Sélectionner une colonne'} selectedValue={selectedColumn} handleValueSelectChange={handleColumnSelectChange}>
+                {columns.map((col) => (
+                    <MenuItem key={col.id} value={col.id} className="text-xs" sx={{
+                        fontSize: '0.85rem',
+                    }}>
+                        {col.label}
+                    </MenuItem>
+                ))}
+            </CustomSelectField>
             {selectedColumn && (
                 <TextField
                     label={`Filtrer par ${columns.find((col) => col.id === selectedColumn)?.label}`}
