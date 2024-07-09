@@ -17,5 +17,6 @@ export const menus = [
     { name: "Clients", link: "/clients",width:26 , height:26, icon: group, role: 'admin' },
     { name: "Véhicules" ,link: "/vehicles",width:27 , height:27, icon: car, role: 'admin' },
     { name: "Demandes" ,link: "/appointments",width:26 , height:26, icon: calendar, role: 'admin' },
-    { name: "Employés" ,link: "/employees",width:29 , height:29, icon: teamwork, role: 'admin' },
+    { name: "Employés", link: "/employees", width: 29, height: 29, icon: teamwork, role: 'admin' },
+    { name: "Mon profil", link: "/profil",width:26 , height:26, icon: user, role: 'admin'}
 ];

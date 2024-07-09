@@ -1,0 +1,112 @@
+.login {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login > :nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  width: 57%;
+  height: 100%;
+}
+
+@media (max-width: 800px) {
+  .login {
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .login > :nth-child(2) {
+    border-top-left-radius: 3.5rem;
+    border-top-right-radius: 3.5rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 80% !important;
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+    padding-left: 1.8rem !important;
+    padding-right: 1.8rem !important;
+    width: 100% !important;
+  }
+
+  .login .header {
+    margin-bottom: 0.5rem !important;
+  }
+
+  .login .title {
+    font-size: 2.4rem !important;
+  }
+
+  .login .subtitle {
+    font-size: 1.1rem !important;
+  }
+
+  .input {
+    margin-bottom: 0.8rem !important;
+    margin-top: 0.8rem !important;
+  }
+
+  .input > :nth-child(1) {
+    font-size: 1.1rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+
+  .footer {
+    margin-top: 1.5rem !important;
+  }
+}
+
+@media (max-width: 300px) {
+  .login > :nth-child(2) {
+    border-top-left-radius: 3.5rem;
+    border-top-right-radius: 3.5rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 80% !important;
+    padding: 1rem !important;
+    padding-left: 1.8rem !important;
+    padding-right: 1.8rem !important;
+    width: 100% !important;
+  }
+
+  .login .header {
+    margin-bottom: 0.7rem !important;
+  }
+
+  .login .title {
+    font-size: 1.7rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+
+  .login .subtitle {
+    font-weight: 500;
+    font-size: 0.8rem !important;
+    line-height: 1.1rem !important;
+  }
+
+  .input {
+    margin-bottom: 0.8rem !important;
+    margin-top: 0.8rem !important;
+  }
+
+  .input > :nth-child(1) {
+    font-size: 1rem !important;
+    padding-bottom: 0.4rem !important;
+  }
+
+  .oublie {
+    font-size: 0.8rem !important;
+  }
+  .footer {
+    margin-top: 1.4rem !important;
+  }
+
+  .footer > :nth-child(1) {
+    font-size: 0.7rem !important;
+  }
+}
