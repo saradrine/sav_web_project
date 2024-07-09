@@ -28,7 +28,7 @@ const renderActiveShape = (props) => {
 };
 
 const ServiceTypesChart = ({year, serviceUsageData, month}) => {
-    const colors  = ['#039388', '#a3f1bf', '#facc15', '#d63384', '#7266ba', '#1890ff', '#2f54eb', '#52c41a', '#fa8c16', '#f5222d'];
+    const colors  = ['#039388', '#75da99', '#facc15', '#d63384', '#7266ba', '#1890ff', '#2f54eb', '#52c41a', '#fa8c16', '#f5222d'];
     const yearData = serviceUsageData[year];
     const pieData = [];
 

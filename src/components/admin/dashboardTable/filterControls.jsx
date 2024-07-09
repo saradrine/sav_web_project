@@ -21,7 +21,7 @@ export default function FilterControls({ filterCriteria, setFilterCriteria, sele
 
     return (
         <Box className={`flex flex-wrap items-center gap-4 ${tableType === TableType.ADMINS ? 'mt-3':'my-3'}`}>
-            <CustomSelectField label={'Sélectionner une colonne'} selectedValue={selectedColumn} handleValueSelectChange={handleColumnSelectChange}>
+            <CustomSelectField width={'200px'} label={'Sélectionner une colonne'} selectedValue={selectedColumn} handleValueSelectChange={handleColumnSelectChange}>
                 {columns.map((col) => (
                     <MenuItem key={col.id} value={col.id} className="text-xs" sx={{
                         fontSize: '0.85rem',
