@@ -21,16 +21,16 @@ const Header = () => {
     return (
         <Grid mb={4} container spacing={2}>
             <Grid item xs={12} sm={6} md={3}>
-                <Card icon={group} title={'Total Clients'} statistic={stats.totalClients} color={'custom-green'}/>
+                <Card icon={group} title={'Total Clients'} statistic={stats.totalClients} color={'bg-custom-green'}/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <Card icon={newClients} title={'Nouveaux Clients'} statistic={stats.newClients} color={'custom-yellow'}/>
+                <Card icon={newClients} title={'Nouveaux Clients'} statistic={stats.newClients} color={'bg-custom-yellow'}/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <Card icon={calendarNavOulined} title={'Total Rendez-vous'} statistic={stats.totalAppointments} padding={true} color={'custom-red'}/>
+                <Card icon={calendarNavOulined} title={'Total Rendez-vous'} statistic={stats.totalAppointments} padding={true} color={'bg-custom-red'}/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-                <Card icon={carOutlined} title={'Total Véhicules'} statistic={stats.totalVehicles} color={'custom-blue'}/>
+                <Card icon={carOutlined} title={'Total Véhicules'} statistic={stats.totalVehicles} color={'bg-custom-blue'}/>
             </Grid>
         </Grid>
     );

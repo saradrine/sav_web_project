@@ -1,11 +1,16 @@
 import PropTypes from "prop-types";
+import {useEffect} from "react";
 
 const Card = ({icon,statistic, title, padding, color}) => {
+    const colors = ['green','yellow', 'red', 'blue', ];
+    useEffect(() => {
+        console.log(color)
+    }, []);
     return (
         <div className="bg-white px-5 py-3.5 rounded-2xl shadow-custom-sm">
             <div className="flex items-center gap-5">
                 <div
-                    className={`w-12 h-12 p-2.5   ${padding ? "ps-3 pe-2" : ""} bg-${color}  rounded-full flex items-center justify-center shadow-custom-md`}>
+                    className={`w-12 h-12 p-2.5   ${padding ? "ps-3 pe-2" : ""} ${color}  rounded-full flex items-center justify-center shadow-custom-md`}>
                     <img style={{filter: "brightness(0) invert(1)"}} src={icon} alt={title} width={30} height={30}/>
                 </div>
                 <div className="text-custom-lg overflow-hidden overflow-ellipsis">

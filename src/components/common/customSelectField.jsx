@@ -35,7 +35,7 @@ const CustomSelectField = ({label,selectedValue, children, handleValueSelectChan
                 value={selectedValue}
                 onChange={handleValueSelectChange}
                 label={`${label}`}
-                className={`sm:min-w-[${width || '200px'}] w-full sm:w-auto`}
+                className={`${width || 'sm:min-w-[200px]'} w-full sm:w-auto`}
                 sx={{
                     height: 43,
                     '& .MuiSelect-select': {

@@ -20,14 +20,14 @@ const ServiceUsage = ({data, years, services}) => {
     return (
         <div className="bg-white px-5 pb-2.5 pt-6 rounded-2xl shadow-custom-sm">
             <div className='flex flex-wrap items-center gap-4 ms-0 sm:ms-6'>
-                <CustomSelectField label={'Année'} selectedValue={selectedYear.toString()} handleValueSelectChange={handleChangeYear} width={'110px'}>
+                <CustomSelectField label={'Année'} selectedValue={selectedYear.toString()} handleValueSelectChange={handleChangeYear} width={'sm:min-w-[110px]'}>
                     {years.map((year) => (
                         <MenuItem key={year} value={year}>
                             {year}
                         </MenuItem>
                     ))}
                 </CustomSelectField>
-                <CustomSelectField label={'Service'} selectedValue={selectedService} handleValueSelectChange={handleChangeService} width={'160px'}>
+                <CustomSelectField label={'Service'} selectedValue={selectedService} handleValueSelectChange={handleChangeService} width={'sm:min-w-[160px]'}>
                     {services.map((service) => (
                         <MenuItem key={service} value={service}>
                             {service}
