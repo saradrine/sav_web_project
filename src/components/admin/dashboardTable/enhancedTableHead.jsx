@@ -19,7 +19,8 @@ export default function EnhancedTableHead(props) {
         rowCount,
         onRequestSort,
         headCells,
-        first
+        first,
+        inClientTable
     } = props;
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property);
@@ -41,26 +42,33 @@ export default function EnhancedTableHead(props) {
                     />
                 </StyledTableCell>}
                 {headCells.map((headCell, i) => (
-                    <StyledTableCell
-                        index = {first && i === headCells.length - 1 ? -1 : -2}
-                        key={headCell.id}
-                        padding={headCell.disablePadding ? 'none' : 'normal'}
-                        sortDirection={orderBy === headCell.id ? order : false}
-                    >
-                        {first ? (<TableSortLabel
-                            active={orderBy === headCell.id}
-                            direction={orderBy === headCell.id ? order : 'asc'}
-                            onClick={createSortHandler(headCell.id)}
+                    inClientTable && i === headCells.length - 1 ? null : (
+                        <StyledTableCell
+                            index={first && i === headCells.length - 1 ? -1 : -2}
+                            key={headCell.id}
+                            padding={headCell.disablePadding ? 'none' : 'normal'}
+                            sortDirection={orderBy === headCell.id ? order : false}
                         >
-                            {headCell.label}
-                            {orderBy === headCell.id ? (
-                                <Box component="span" sx={visuallyHidden}>
-                                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                                </Box>
-                            ) : null}
-                        </TableSortLabel>): <div style={{cursor:'pointer'}}>{headCell.label}</div>}
-                    </StyledTableCell>
-                ))}
+                            {first ? (
+                                <TableSortLabel
+                                    active={orderBy === headCell.id}
+                                    direction={orderBy === headCell.id ? order : 'asc'}
+                                    onClick={createSortHandler(headCell.id)}
+                                >
+                                    {headCell.label}
+                                    {orderBy === headCell.id ? (
+                                        <Box component="span" sx={visuallyHidden}>
+                                            {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                                        </Box>
+                                    ) : null}
+                                </TableSortLabel>
+                            ) : (
+                                <div style={{cursor: 'pointer'}}>{headCell.label}</div>
+                            )}
+                        </StyledTableCell>
+                    )
+
+                    ))}
             </TableRow>
         </TableHead>
     );
@@ -75,5 +83,6 @@ EnhancedTableHead.propTypes = {
     rowCount: PropTypes.number.isRequired,
     headCells: PropTypes.array.isRequired,
     first: PropTypes.bool,
+    inClientTable: PropTypes.bool
     
 };

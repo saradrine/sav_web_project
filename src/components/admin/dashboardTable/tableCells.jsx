@@ -10,7 +10,7 @@ const colors = {
 };
 const renderCellContent = (type, cellId, row) => {
     const cellMapping = {
-        client: row.client ? row.client.nom : '',
+        client: row.client ? `${row?.client?.nom} ${row?.client?.prenom}` : '',
         vehicule: row.vehicule ? `${row.vehicule.marque} ${row.vehicule.modele}` : '',
     };
 
@@ -24,9 +24,9 @@ const renderCellContent = (type, cellId, row) => {
     return row[cellId];
 };
 
-export default function TableCells({ row, headCells, type }) {
+export default function TableCells({ row, headCells, type, inClientTable }) {
     return headCells.map((cell, i) => (
-        cell.id !== 'id' && (type === TableType.CLIENTS ? i !== headCells.length - 1 : true) && (
+        cell.id !== 'id' && (type === TableType.CLIENTS || inClientTable ? i !== headCells.length - 1 : true) && (
             <TableCell key={cell.id}>
                 {renderCellContent(type, cell.id, row)}
             </TableCell>

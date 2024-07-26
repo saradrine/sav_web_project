@@ -29,6 +29,7 @@ import TableCells from "./tableCells.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
 import AppointmentDetails from "../appointments/appointmentDetails.jsx";
 import AddEmployee from "../employees/addEmployee.jsx";
+import NoElement from "./noElement.jsx";
 
 export default function DashboardTable({
   headCells,
@@ -47,6 +48,7 @@ export default function DashboardTable({
   const [filteredRows, setFilteredRows] = useState(rows);
   const [filterCriteria, setFilterCriteria] = useState({});
   const [selectedColumn, setSelectedColumn] = useState("");
+  let typeSingular = tableType.substring(0, tableType.length - 1).toLowerCase();
 
   const navigate = useNavigate();
   let location = useLocation();
@@ -176,6 +178,8 @@ export default function DashboardTable({
           tableType={tableType}
           data={rows}
           headers={headers}
+          selected={selected}
+          setSelected={setSelected}
         />
         {tableType === TableType.ADMINS ? (
           <Box
@@ -224,123 +228,129 @@ export default function DashboardTable({
               rowCount={rows.length}
               headCells={headCells}
             />
-            <TableBody>
+            {rows.length === 0 || filteredRows.length === 0 ? (<NoElement message={`Aucun ${typeSingular} enregistré`}/>):(<TableBody>
               {visibleRows.map((row, index) => {
                 const isItemSelected = isSelected(row.id);
                 const labelId = `enhanced-table-checkbox-${index}`;
                 const isOpen = openRowId === row.id;
 
                 return (
-                  <React.Fragment key={row.id}>
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      selected={isItemSelected}
-                      sx={{ cursor: "pointer" }}
-                      onClick={() => {
-                        if (tableType === TableType.APPOINTMENTS) {
-                          appointmentDetails(row);
-                        }
-                      }}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            handleClick(event, row.id);
+                    <React.Fragment key={row.id}>
+                      <TableRow
+                          hover
+                          role="checkbox"
+                          aria-checked={isItemSelected}
+                          tabIndex={-1}
+                          selected={isItemSelected}
+                          sx={{cursor: "pointer"}}
+                          onClick={() => {
+                            if (tableType === TableType.APPOINTMENTS) {
+                              appointmentDetails(row);
+                            }
                           }}
-                          color="primary"
-                          checked={isItemSelected}
-                          inputProps={{
-                            "aria-labelledby": labelId,
-                          }}
+                      >
+                        <TableCell padding="checkbox">
+                          <Checkbox
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                handleClick(event, row.id);
+                              }}
+                              color="primary"
+                              checked={isItemSelected}
+                              inputProps={{
+                                "aria-labelledby": labelId,
+                              }}
+                          />
+                        </TableCell>
+
+                        <TableCells
+                            row={row}
+                            headCells={headCells}
+                            type={tableType}
                         />
-                      </TableCell>
 
-                      <TableCells
-                        row={row}
-                        headCells={headCells}
-                        type={tableType}
-                      />
-
-                      {tableType === TableType.CLIENTS && (
-                        <TableCell style={{ paddingLeft: "32px" }}>
-                          <IconButton
-                            aria-label="expand row"
-                            size="small"
-                            onClick={() => toggleRowDetails(row.id)}
-                          >
-                            {isOpen ? (
-                              <KeyboardArrowUpIcon />
-                            ) : (
-                              <KeyboardArrowDownIcon />
-                            )}
-                          </IconButton>
-                        </TableCell>
-                      )}
-                    </TableRow>
-                    {tableType === TableType.CLIENTS && isOpen && (
-                      <TableRow>
-                        <TableCell
-                          style={{ paddingBottom: 30, paddingTop: 15 }}
-                          colSpan={8}
-                        >
-                          <Collapse in={isOpen} timeout="auto" unmountOnExit>
-                            <Box sx={{ margin: 1 }}>
-                              <Typography
-                                variant="h6"
-                                gutterBottom
-                                component="div"
+                        {tableType === TableType.CLIENTS && (
+                            <TableCell style={{paddingLeft: "32px"}}>
+                              <IconButton
+                                  aria-label="expand row"
+                                  size="small"
+                                  onClick={() => toggleRowDetails(row.id)}
                               >
-                                {TableType.VEHICLES}
-                              </Typography>
-                              {
-                                <Table size="small" aria-label="purchases">
-                                  <EnhancedTableHead
-                                    rowCount={row.vehicles?.length}
-                                    headCells={vehiclesHeadCells}
-                                  />
-                                  <TableBody>
-                                    {row.vehicles?.map((vehicleRow, i) => (
-                                      <TableRow
-                                        key={i}
-                                        sx={{ cursor: "pointer" }}
-                                        onClick={() => {
-                                          navigateToVehicle(
-                                            vehicleRow.numChassis
-                                          );
-                                        }}
-                                      >
-                                        <TableCells
-                                          row={vehicleRow}
-                                          headCells={vehiclesHeadCells}
-                                          type={TableType.VEHICLES}
-                                        />
-                                      </TableRow>
-                                    ))}
-                                  </TableBody>
-                                </Table>
-                              }
-                            </Box>
-                          </Collapse>
-                        </TableCell>
+                                {isOpen ? (
+                                    <KeyboardArrowUpIcon/>
+                                ) : (
+                                    <KeyboardArrowDownIcon/>
+                                )}
+                              </IconButton>
+                            </TableCell>
+                        )}
                       </TableRow>
-                    )}
-                  </React.Fragment>
+                      {tableType === TableType.CLIENTS && isOpen && (
+                          <TableRow>
+                            <TableCell
+                                style={{paddingBottom: 30, paddingTop: 15}}
+                                colSpan={9}
+                            >
+                              <Collapse in={isOpen} timeout="auto" unmountOnExit>
+                                <Box sx={{margin: 1}}>
+                                  <Typography
+                                      variant="h6"
+                                      gutterBottom
+                                      component="div"
+                                  >
+                                    {TableType.VEHICLES}
+                                  </Typography>
+                                  {
+                                    <Table size="small" aria-label="purchases">
+                                      <EnhancedTableHead
+                                          rowCount={row.vehicules?.length}
+                                          headCells={vehiclesHeadCells}
+                                          inClientTable={true}
+                                      />
+                                      {
+                                        row.vehicules?.length > 0 ? (<TableBody>
+                                          {row.vehicules?.map((vehicleRow, i) => (
+                                              <TableRow
+                                                  key={i}
+                                                  sx={{cursor: "pointer"}}
+                                                  onClick={() => {
+                                                    navigateToVehicle(
+                                                        vehicleRow.numChassis
+                                                    );
+                                                  }}
+                                              >
+                                                <TableCells
+                                                    row={vehicleRow}
+                                                    headCells={vehiclesHeadCells}
+                                                    type={TableType.VEHICLES}
+                                                    inClientTable={true}
+                                                />
+                                              </TableRow>
+                                          ))}
+                                        </TableBody>) : (
+                                            <NoElement message={"Aucun véhicule trouvé"}/>
+                                        )
+                                      }
+                                    </Table>
+                                  }
+                                </Box>
+                              </Collapse>
+                            </TableCell>
+                          </TableRow>
+                      )}
+                    </React.Fragment>
                 );
               })}
               {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={8} />
-                </TableRow>
+                  <TableRow
+                      style={{
+                        height: (dense ? 33 : 53) * emptyRows,
+                      }}
+                  >
+                    <TableCell colSpan={8}/>
+                  </TableRow>
               )}
-            </TableBody>
+            </TableBody>) }
           </Table>
         </TableContainer>
         <TablePagination

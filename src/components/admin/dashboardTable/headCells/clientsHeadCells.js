@@ -5,7 +5,12 @@ export const clientsHeadCells = [
         label: 'Email',
     },
     {
-        id: 'nom',
+        id: 'cin',
+        disablePadding: false,
+        label: 'CIN',
+    },
+    {
+        id: 'nomPrenom',
         disablePadding: true,
         label: 'Nom et Prénom',
     },
@@ -25,7 +30,7 @@ export const clientsHeadCells = [
         label: 'Adresse',
     },
     {
-        id: 'dateDeNaissance',
+        id: 'dateNaissance',
         disablePadding: true,
         label: 'Date de naissance',
     },
@@ -39,9 +44,9 @@ export const clientsHeadCells = [
 export const headersCSV =[
     {label: 'ID', key: 'id'},
     {label: 'Email', key: 'email'},
-    {label: 'Nom et Prénom', key: 'nom'},
+    {label: 'Nom et Prénom', key: 'nomPrenom'},
     {label: 'Téléphone', key: 'telephone'},
     {label: 'Emploi', key: 'emploi'},
     {label: 'Adresse', key: 'adresse'},
-    {label: 'Date de naissance', key: 'dateDeNaissance'},
+    {label: 'Date de naissance', key: 'dateNaissance'},
 ]

@@ -25,6 +25,11 @@ export const AppointmentHeadCells = [
         label: 'Service',
     },
     {
+        id:'kilometrage',
+        disablePadding: false,
+        label: 'Kilométrage',
+    },
+    {
         id:'etat',
         disablePadding: false,
         label: 'Etat',

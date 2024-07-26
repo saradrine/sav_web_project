@@ -4,7 +4,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import PropTypes from 'prop-types';
 import {Typography, MenuItem, Select, FormControl, InputLabel, Grid, useTheme} from '@mui/material';
-import AppointmentStatus from "../../../utils/enum/appointmentStatus.enum.js";
+import AppointmentStatus, {AppointmentStatusReverse} from "../../../utils/enum/appointmentStatus.enum.js";
 import { CustomButton } from "../../common/CustomButton.jsx";
 import calendar from "../../../assets/icons/calendarGray.png"
 import car from "../../../assets/icons/carGray.png"
@@ -15,9 +15,12 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import {CustomGrid} from "../../common/customGrid.jsx";
 import CloseButton from "../../common/closeButton.jsx";
 import * as React from "react";
+import {useMutation} from "@apollo/client";
+import {UPDATE_APPOINTMENT} from "../../../queries/appointments-queries.js";
 
 
 const AppointmentDetails = ({ open, setOpen, appointment }) => {
+    const [updateAppointment, { data, loading, error }] = useMutation(UPDATE_APPOINTMENT);
     const [status, setStatus] = useState(appointment.etat || '');
     // const theme = useTheme();
     // const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
@@ -35,6 +38,19 @@ const AppointmentDetails = ({ open, setOpen, appointment }) => {
         setStatus(event.target.value);
     };
 
+    const handleSave = () => {
+        console.log(status)
+        console.log(appointment.id)
+        const statusKey = AppointmentStatusReverse[status];
+        if (!statusKey) {
+            console.error(`Invalid status: ${status}`);
+            return;
+        }
+        updateAppointment({ variables: { id: appointment.id, input: { etat: statusKey } } })
+            .then(r => console.log(r))
+            .catch(e => console.log(e));
+        handleClose();
+    }
     return (
         <Dialog
             sx={{ '& .MuiDialog-paper': { borderRadius: '15px', padding: '16px', width: '100%', maxWidth: '30rem' } }}
@@ -58,7 +74,7 @@ const AppointmentDetails = ({ open, setOpen, appointment }) => {
                         </Typography>
                         <Typography  gutterBottom sx={{marginLeft: {xs: 4, sm: 0}}}>
                             <Typography fontSize={19} gutterBottom sx={{padding:0, margin:0}}>
-                                {appointment?.client?.nom}
+                                {appointment?.client?.nom} {appointment?.client?.prenom}
                             </Typography>
                             <Typography variant="body2" color="textSecondary">
                                 {appointment?.client?.email}
@@ -92,13 +108,13 @@ const AppointmentDetails = ({ open, setOpen, appointment }) => {
                         <Grid item  xs={12} sm={6} >
                             <Typography variant="body1" color="textSecondary" gutterBottom sx={{ display: 'flex', alignItems: 'start' }}>
                                 <img src={calendar} alt={'calendar'} width={17} className="me-3 mt-0.5"/>
-                                <strong>Date :</strong> {appointment.date}
+                                <strong>Date :</strong>&nbsp; {appointment.date}
                             </Typography>
                         </Grid>
                         <Grid item  xs={12} sm={6}>
                             <Typography variant="body1" color="textSecondary" gutterBottom sx={{ display: 'flex', alignItems: 'start' }}>
                                 <img src={clock} alt={'clock'} width={17} className="me-3 mt-0.5"/>
-                                <strong>Heure :</strong> {appointment.heure}
+                                <strong>Heure :</strong>&nbsp; {appointment.heure}
                             </Typography>
                         </Grid>
                     </CustomGrid>
@@ -145,7 +161,7 @@ const AppointmentDetails = ({ open, setOpen, appointment }) => {
                             </FormControl>
                         </Grid>
                         <Grid className="flex justify-end" item xs={12} sm={4}>
-                            <CustomButton  backgroundcolor="#039388" borderradius="15px" onClick={handleClose} variant="contained" disableRipple>
+                            <CustomButton  backgroundcolor="#039388" borderradius="15px" onClick={handleSave} variant="contained" disableRipple>
                                 Sauvegarder
                             </CustomButton>
                         </Grid>

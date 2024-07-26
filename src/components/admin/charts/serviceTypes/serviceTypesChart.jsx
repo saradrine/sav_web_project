@@ -44,7 +44,6 @@ const ServiceTypesChart = ({year, serviceUsageData, month}) => {
             });
         }
     });
-    console.log(pieData);
 
     return (
         <div>

@@ -2,7 +2,7 @@ import "./options.css";
 
 const Options = ({toggleRead, deleteNotif}) => {
   return (
-    <div className="options absolute right-12 mt-6 bg-white p-1">
+    <div className="options absolute right-3 mt-6 bg-white p-1">
       <ul>
         <li onClick={toggleRead} className="li p-2 cursor-pointer">
           Marquer comme lu

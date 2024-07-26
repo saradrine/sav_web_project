@@ -4,6 +4,7 @@ import logout from "../../assets/icons/logout.png";
 import bell from "../../assets/icons/bell.png";
 import Notifications from "../notification/notifications";
 import "./navbar.css";
+import {useNotification} from "../../context/notificationContext.jsx";
 
 function ComplexNavbar() {
   const navbarRef = useRef(null);
@@ -12,7 +13,7 @@ function ComplexNavbar() {
   const [isNarrow, setIsNarrow] = useState(false);
   const [showTypography, setShowTypography] = useState(true);
   const [showNotifications, setShowNotifications] = useState(false);
-
+  const { unreadCount, markNotificationsAsRead } = useNotification();
   useOutsideClick(notifRef, () => setShowNotifications(false));
 
   useEffect(() => {
@@ -79,10 +80,16 @@ function ComplexNavbar() {
             <div className="relative flex items-center" ref={notifRef}>
               <div className="iconn flex-shrink-0 justify-center items-center mr-2">
                 <button
-                  onClick={() => setShowNotifications(!showNotifications)}
+                  onClick={() => {
+                    setShowNotifications(!showNotifications)
+                    markNotificationsAsRead();
+                  }}
                   className="iconn"
                 >
-                  <img src={bell} alt="Notifications" className="h-8 w-8" />
+                  <img src={bell} alt="Notifications" className="h-7 w-7" />
+                  {unreadCount > 0 && (<div className="notification-dot d-flex justify-content-center bg-custom-red w-3/6 h-3/6 rounded-full absolute translate-x-2 -translate-y-2 right-2 top-1 text-white font-semibold text-custom-sm">
+                    {unreadCount}
+                  </div>)}
                 </button>
               </div>
               {showNotifications && <Notifications />}
@@ -92,7 +99,7 @@ function ComplexNavbar() {
                 <img
                   src={logout}
                   alt="Déconnexion"
-                  className="h-9 w-10"
+                  className="h-8 w-9"
                   style={{ transform: "scaleX(-1)" }}
                 />
               </button>

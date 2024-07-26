@@ -7,7 +7,6 @@ const NotificationCard = ({ notif }) => {
   const optionRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showOptions, setShowOptions] = useState(false);
-
   useOutsideClick(optionRef, () => setShowOptions(false));
 
   function useOutsideClick(ref, callback) {
@@ -59,8 +58,8 @@ const NotificationCard = ({ notif }) => {
   return (
     <div className="py-1">
       <div className="flex relative justify-between" ref={optionRef}>
-        <div className="relative flex-grow text-wrap line-clamp-2 text-md pr-5">
-          {notif.message}
+        <div className="relative flex-grow text-wrap line-clamp-2 text-sm pr-5">
+          {notif.content}
         </div>
         <button
           onClick={() => setShowOptions(!showOptions)}
@@ -83,10 +82,10 @@ const NotificationCard = ({ notif }) => {
       </div>
       <div className="flex justify-between items-center py-1">
         <div className="text-gray-500 text-xs">
-          {formatNotificationDate(notif.time)}
+          {formatNotificationDate(notif.createdAt)}
         </div>
-        {notif.isUnRead && (
-          <span className="h-2 w-2 bg-blue-500 rounded-full"></span>
+        {!notif.isRead && (
+          <span className="h-2 w-2 bg-custom-green rounded-full"></span>
         )}
       </div>
     </div>

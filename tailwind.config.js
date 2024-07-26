@@ -17,6 +17,7 @@ export default {
       fontSize: {
         'custom-lg': '1.05rem',
         'custom-md': '.9rem',
+        'custom-sm': '.75rem',
       },
       spacing: {
         '22': '5.5rem',

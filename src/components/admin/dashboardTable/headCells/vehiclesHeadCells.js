@@ -32,7 +32,7 @@ export const vehiclesHeadCells = [
     },
     {
         id:'immatriculation',
-        disablePadding: false,
+        disablePadding: true,
         label: 'Plaque d\'immatriculation',
     },
     {

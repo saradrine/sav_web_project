@@ -5,4 +5,8 @@ const AppointmentStatus = {
     CANCELED: 'Annulé',
     DONE: 'Terminé',
 }
+export const AppointmentStatusReverse = Object.entries(AppointmentStatus).reduce((acc, [key, value]) => {
+    acc[value] = key;
+    return acc;
+}, {});
 export default AppointmentStatus;

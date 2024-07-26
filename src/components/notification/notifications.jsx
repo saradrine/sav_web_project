@@ -2,41 +2,10 @@ import { differenceInHours } from "date-fns";
 import NotificationCard from "./notifCard";
 import "./notifications.css";
 import Scrollbar from "../scrollbar/scrollbar";
+import {useNotification} from "../../context/notificationContext.jsx";
 
 function Notifications() {
-  const notifications = [
-    {
-      message:
-        "Lorem Ipsum is simply dummy text of the typesetting printing and typesetting industry.",
-      time: Date.parse("2024-07-01 01:30:00"),
-      isUnRead: true,
-    },
-    {
-      message: "Lorem 2",
-      time: Date.parse("2024-07-05 01:30:00"),
-      isUnRead: false,
-    },
-    {
-      message: "Lorem 6",
-      time: Date.parse("2024-07-06 01:30:00"),
-      isUnRead: true,
-    },
-    {
-      message: "Lorem 3",
-      time: Date.parse("2024-07-05 05:30:00"),
-      isUnRead: true,
-    },
-    {
-      message: "Lorem 4",
-      time: Date.parse("2024-05-29 15:30:00"),
-      isUnRead: false,
-    },
-    {
-      message: "You have 1 new message",
-      time: Date.parse("2024-06-27 01:30:00"),
-      isUnRead: false,
-    },
-  ];
+  const { notifications, loading, error } = useNotification();
 
   //   const differenceInHours = (now, date) => {
   //     return Math.abs(Math.floor((now - date) / 60000) / 60);
@@ -47,10 +16,9 @@ function Notifications() {
   const getNouveauNotifications = () => {
     return notifications
       .filter((notif) => {
-        const diffHours = differenceInHours(now, notif.time);
+        const diffHours = differenceInHours(now, notif.createdAt);
         return diffHours < 24;
-      })
-      .sort((a, b) => b.time - a.time);
+      }).sort((a, b) =>  new Date(b.createdAt) - new Date(a.createdAt));
   };
 
   const nouveauNotifications = getNouveauNotifications();
@@ -58,35 +26,37 @@ function Notifications() {
   const getDerniers7JoursNotifications = () => {
     return notifications
       .filter((notif) => {
-        const diffHours = differenceInHours(now, notif.time);
+        const diffHours = differenceInHours(now, notif.createdAt);
         return diffHours < 24 * 7 && diffHours > 24;
       })
-      .sort((a, b) => b.time - a.time);
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   };
 
   const getAnciensNotifications = () => {
     return notifications
       .filter((notif) => {
-        const diffHours = differenceInHours(now, notif.time);
+        const diffHours = differenceInHours(now, notif.createdAt);
         return diffHours > 24 * 7;
       })
-      .sort((a, b) => b.time - a.time);
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   };
 
   return (
     <div
-      className="notifications absolute top-full mt-7 right-0 bg-white px-3 py-2"
+      className="notifications absolute top-full mt-7 right-0 bg-white px-3 pb-2 pt-3"
       style={{ width: "330px", height: "485px", zIndex: 2 }}
     >
+      <h1 className="text-lg ml-2 font-bold">Notifications</h1>
+
       <Scrollbar
         thumbColor={"#DBDFE6"}
         trackColor={"#F0F2F5"}
-        maxHeight={"450px"}
+        maxHeight={"410px"}
       >
         <div>
           {nouveauNotifications.length > 0 && (
             <div className="card mb-5 mt-1 mr-4 ml-2 py-3 px-3">
-              <div className="text-lg font-bold px-1.5">Nouveau</div>
+              <div className="text-custom-lg font-bold px-1.5">Nouveau</div>
               {nouveauNotifications.map((notification, index) => (
                 <div key={index}>
                   {index !== 0 && <hr className="mt-1 mb-1" />}
@@ -107,7 +77,7 @@ function Notifications() {
             </div>
           )}
           {getAnciensNotifications().length > 0 && (
-            <div className="card mt-5 mb-1 mr-4 ml-2 py-3 px-3">
+            <div className="card shadow-custom-sm mt-5 mb-1 mr-4 ml-2 py-3 px-3">
               <div className="text-lg font-bold px-1.5">Anciens</div>
               {getAnciensNotifications().map((notification, index) => (
                 <div key={index}>

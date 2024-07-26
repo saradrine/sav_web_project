@@ -5,9 +5,19 @@ export const employeesHeadCells = [
         label: 'Email',
     },
     {
-        id: 'nom',
+        id: 'cin',
+        disablePadding: false,
+        label: 'CIN',
+    },
+    {
+        id: 'nomPrenom',
         disablePadding: true,
         label: 'Nom et Prénom',
+    },
+    {
+        id: 'emploi',
+        disablePadding: true,
+        label: 'Emploi',
     },
     {
         id: 'telephone',

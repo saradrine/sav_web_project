@@ -12,24 +12,29 @@ import * as React from "react";
 import {CustomDatePicker, CustomTextField} from "../../common/customTextAndDateFields.jsx";
 import profession from "../../../assets/icons/profession.png";
 import CloseButton from "../../common/closeButton.jsx";
+import {useMutation} from "@apollo/client";
+import {ADD_ADMIN} from "../../../queries/users-queries.js";
 
 const AddEmployee = () => {
+    const [addAdmin, { data, loading, error }] = useMutation(ADD_ADMIN);
     const [open, setOpen] = useState(false);
     const [employee, setEmployee] = useState({
         email: '',
+        cin: 0,
         nom: '',
+        emploi: '',
         prenom: '',
         telephone: '',
         adresse: '',
-        dateDeNaissance: null,
+        dateNaissance: null,
     });
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setEmployee({ ...employee, [name]: value });
+        setEmployee({ ...employee, [name]: name === 'cin' ? parseInt(value) : value });
     };
     const handleDateChange = (date) => {
-        setEmployee({ ...employee, ['dateDeNaissance']: date });
+        setEmployee({ ...employee, ['dateNaissance']: date });
     };
     const onClose = () => {
         setOpen(false);
@@ -39,21 +44,29 @@ const AddEmployee = () => {
         setEmployee(
             {
                 email: '',
+                cin: 0,
                 nom: '',
+                emploi: '',
                 prenom: '',
                 telephone: '',
                 adresse: '',
-                dateDeNaissance: null,
+                dateNaissance: null,
             }
         )
     }
     const handleAddAdmin = () => {
-        console.log(employee)
+        console.log(employee);
+        addAdmin({ variables: { input: employee } })
+            .then(r => console.log(r))
+            .catch(e => console.error(e));
+         cancel();
     };
 
     const onOpen = () => {
         setOpen(true);
     }
+    if (loading) return 'Submitting...';
+    if (error) return `Submission error! ${error.message}`;
     return (
         <div>
             <CustomButton width={'none'} height="40px" borderradius="30px" variant="contained" disableRipple onClick={onOpen}>
@@ -79,6 +92,22 @@ const AddEmployee = () => {
                         name="email"
                         label="Email"
                         type="email"
+                        fullWidth
+                        onChange={handleInputChange}
+                    />
+                    <CustomTextField
+                        margin="dense"
+                        name="cin"
+                        label="CIN"
+                        type="number"
+                        fullWidth
+                        onChange={handleInputChange}
+                    />
+                    <CustomTextField
+                        margin="dense"
+                        name="emploi"
+                        label="Emploi"
+                        type="text"
                         fullWidth
                         onChange={handleInputChange}
                     />
@@ -120,7 +149,7 @@ const AddEmployee = () => {
                             className="w-full"
                             label="Date de naissance"
                             onChange={handleDateChange}
-                            name="dateDeNaissance"
+                            name="dateNaissance"
                         />
                     </LocalizationProvider>
                 </DialogContent>

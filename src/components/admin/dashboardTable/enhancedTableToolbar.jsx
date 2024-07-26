@@ -10,9 +10,30 @@ import { CSVLink } from "react-csv";
 import {Box} from "@mui/material";
 import downloads from "../../../assets/icons/downloads.png";
 import Button from "@mui/material/Button";
+import {REMOVE_USER} from "../../../queries/users-queries.js";
+import {useMutation} from "@apollo/client";
+import {REMOVE_VEHICULE} from "../../../queries/vehicles-queries.js";
+import {REMOVE_APPOINTMENT} from "../../../queries/appointments-queries.js";
+import TableType from "../../../utils/enum/tableType.enum.js";
 export default function EnhancedTableToolbar(props) {
-    const { numSelected, tableType, data, headers } = props;
+    const { numSelected, setSelected, tableType, data, headers, selected } = props;
+    const mutationMapping = {
+        [TableType.ADMINS]: REMOVE_USER,
+        [TableType.CLIENTS]: REMOVE_USER,
+        [TableType.VEHICLES]: REMOVE_VEHICULE,
+        [TableType.APPOINTMENTS]: REMOVE_APPOINTMENT,
+    };
+    const mutation = mutationMapping[tableType];
+    const [removeItem, { data: removedData, loading, error }] = useMutation(mutation);
 
+    const handleDelete = () => {
+        selected.forEach(id => {
+            removeItem({ variables: { id: id } })
+                .then(r => console.log(r))
+                .catch(e => console.error(e));
+        });
+        setSelected([]);
+    }
     return (
         <Toolbar
             sx={{
@@ -49,8 +70,8 @@ export default function EnhancedTableToolbar(props) {
 
             {numSelected > 0 ? (
                 <Tooltip title="Supprimer">
-                    <IconButton>
-                        <DeleteIcon />
+                    <IconButton onClick={handleDelete} >
+                        <DeleteIcon/>
                     </IconButton>
                 </Tooltip>
             ) :  (
@@ -73,4 +94,6 @@ EnhancedTableToolbar.propTypes = {
     tableType: PropTypes.string.isRequired,
     data: PropTypes.array.isRequired,
     headers: PropTypes.array,
+    selected: PropTypes.array.isRequired,
+    setSelected: PropTypes.func.isRequired,
 };

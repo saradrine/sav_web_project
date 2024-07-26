@@ -1,11 +1,6 @@
 import PropTypes from "prop-types";
-import {useEffect} from "react";
 
 const Card = ({icon,statistic, title, padding, color}) => {
-    const colors = ['green','yellow', 'red', 'blue', ];
-    useEffect(() => {
-        console.log(color)
-    }, []);
     return (
         <div className="bg-white px-5 py-3.5 rounded-2xl shadow-custom-sm">
             <div className="flex items-center gap-5">
