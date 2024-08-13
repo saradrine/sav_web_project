@@ -1,0 +1,19 @@
+.options {
+  z-index: 1;
+  border-radius: 1rem;
+    box-shadow: 0 -7px 15px -7px rgba(0, 0, 0, 0.2),
+    0 7px 15px -7px rgba(0, 0, 0, 0.2), -7px 0 15px -7px rgba(0, 0, 0, 0.1);
+
+}
+
+.li:hover:first-of-type{
+  background-color: #F0F2F5;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.li:hover:last-of-type{
+  background-color: #F0F2F5;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
