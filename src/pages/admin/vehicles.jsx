@@ -11,7 +11,7 @@ const Vehicles = () => {
     });
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
-    const processedVehicules = data.vehicules.map(vehicule => ({
+    const processedVehicules = data?.vehicules.map(vehicule => ({
         ...vehicule,
         proprietaire: `${vehicule.client.nom} ${vehicule.client.prenom}`,
     }));

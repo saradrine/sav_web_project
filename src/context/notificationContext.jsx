@@ -1,7 +1,7 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import {useMutation, useQuery, useSubscription} from "@apollo/client";
-import {APPOINTMENT_CREATED, APPOINTMENT_UPDATED, GET_NOTIFICATIONS, MARK_AS_READ} from "../queries/notifications.js";
+import {APPOINTMENT_CREATED, APPOINTMENT_UPDATED, GET_NOTIFICATIONS, MARK_AS_READ} from "../queries/notifications-queries.js";
 
 const NotificationContext = createContext();
 export const useNotification = () => {
@@ -82,7 +82,7 @@ export const NotificationProvider = ({children}) => {
 
 
     return (
-        <NotificationContext.Provider value={{ notifications, loading, error, unreadCount, markNotificationsAsRead  }}>
+        <NotificationContext.Provider value={{ notifications, loading, error, unreadCount, markNotificationsAsRead, setNotifications  }}>
             {children}
         </NotificationContext.Provider>
     );

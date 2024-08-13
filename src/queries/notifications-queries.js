@@ -37,6 +37,7 @@ export const GET_NOTIFICATIONS = gql`
             type
             content
             isRead
+            isSeen
             receiver {
                 id
             }
@@ -46,6 +47,21 @@ export const GET_NOTIFICATIONS = gql`
 export const MARK_AS_READ = gql`
     mutation MarkAsRead($id: ID!) {
         markAsRead(id: $id) {
+            id
+        }
+    }
+`;
+
+export const MARK_AS_SEEN = gql`
+    mutation MarkAsSeen($id: ID!) {
+        markAsSeen(id: $id) {
+            id
+        }
+    }
+`;
+export const DELETE_NOTIFICATION = gql`
+    mutation DeleteNotification($id: ID!) {
+        removeNotification(id: $id) {
             id
         }
     }

@@ -71,7 +71,7 @@ const AddEmployee = () => {
         <div>
             <CustomButton width={'none'} height="40px" borderradius="30px" variant="contained" disableRipple onClick={onOpen}>
                 <img src={addWhite} alt={'addWhite'} width={15} className="me-2"/>
-                <span className="overflow-hidden overflow-ellipsis whitespace-nowrap">Ajouter un employé</span>
+                <span className="overflow-hidden overflow-ellipsis whitespace-nowrap text-white">Ajouter un employé</span>
             </CustomButton>
 
             <Dialog sx={{ '& .MuiDialog-paper': { borderRadius: '15px', padding: '16px', maxWidth: '30rem' } }}
