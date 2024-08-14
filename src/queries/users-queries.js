@@ -74,3 +74,21 @@ export const RESTORE_USER = gql`
   }
 }
 `;
+
+export const FIND_USER_BY_ID = gql`
+  query FindUserById($id: ID!) {
+    user(id: $id) {
+      id
+      nom
+      prenom
+      email
+      cin
+      telephone
+      adresse
+      sexe
+      dateNaissance
+      emploi
+      role
+    }
+  }
+`;

@@ -4,13 +4,29 @@ import Modal from "@mui/material/Modal";
 import show from "../assets/icons/show.png";
 import hide from "../assets/icons/hide.png";
 import { Typography } from "@mui/material";
+import { useMutation } from "@apollo/client";
+import { CHANGE_PASSWORD_MUTATION } from "../queries/auth-queries";
 
 const ChangePasswordPopup = ({ isPopupOpen, setIsPopupOpen }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showAncien, setShowAncien] = useState(false);
-  const handleSubmit = () => {
-    console.log("submit");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const [changePassword] = useMutation(CHANGE_PASSWORD_MUTATION);
+
+  const handleSubmit = async () => {
+    try {
+      const { data } = await changePassword({
+        variables: { password, confirmPassword },
+      });
+      console.log("Password changed successfully", data);
+    } catch (error) {
+      setError(error.message);
+      console.error("Error changing password", error);
+    }
   };
 
   const handleClose = () => setIsPopupOpen(false);
@@ -32,6 +48,7 @@ const ChangePasswordPopup = ({ isPopupOpen, setIsPopupOpen }) => {
         <div className="text-2xl text-center font-bold">
           Changer le mot de passe
         </div>
+        {error && <div className="text-red-500 text-center mt-4">{error}</div>}
         <div className="px-2">
           <div className="mt-8">
             <label
@@ -79,6 +96,8 @@ const ChangePasswordPopup = ({ isPopupOpen, setIsPopupOpen }) => {
                 type={showPassword ? "text" : "password"}
                 id="newPassword"
                 className="w-full bg-[#F0F2F5] rounded-[20px] focus:outline-none active:border-none pl-6 pr-12 py-2"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
@@ -103,6 +122,7 @@ const ChangePasswordPopup = ({ isPopupOpen, setIsPopupOpen }) => {
                 type={showConfirmPassword ? "text" : "password"}
                 id="confirmPassword"
                 className="w-full bg-[#F0F2F5] rounded-[20px] focus:outline-none active:border-none pl-6 pr-12 py-2"
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
           </div>

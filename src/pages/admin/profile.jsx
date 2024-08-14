@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Box, Paper, Toolbar, Tooltip, Typography } from "@mui/material";
 import pencil from "../../assets/icons/pencil.png";
 import TableType from "../../utils/enum/tableType.enum";
-import user from "../../assets/icons/user.png";
+import userIMG from "../../assets/icons/user.png";
 import suitcase from "../../assets/icons/suitcase.png";
 import cake from "../../assets/icons/cake.png";
 import mail from "../../assets/icons/mail.png";
@@ -12,18 +12,26 @@ import gpsNavigation from "../../assets/icons/gps-navigation.png";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import ChangePasswordPopup from "../../components/changePassword";
+import { useQuery } from "@apollo/client";
+import { useAuth } from "../../context/authContext";
+import { FIND_USER_BY_ID } from "../../queries/users-queries";
 
 const ProfilAdmin = () => {
+    const { currentUser } = useAuth();
+    const { data, loading, error } = useQuery(FIND_USER_BY_ID, {
+      variables: { id: currentUser.id },
+    });
   const [isEditMode, setIsEditMode] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const user = data?.user;
   const initialData = {
-    nom: "ben foulen",
-    prenom: "foulen",
-    adresseMail: "foulenbenfoulen@gmail.com",
-    numTel: "55555555",
-    emploi: "architecte",
-    adresse: "55 rue de la paix, 1000 Tunis",
-    dateNaissance: "22/05/2020",
+    nom: user?.nom,
+    prenom: user?.prenom,
+    adresseMail: user?.email,
+    numTel: user?.telephone,
+    emploi: user?.emploi,
+    adresse: user?.adresse,
+    dateNaissance: user?.dateNaissance,
   };
   const [formData, setFormData] = useState(initialData);
 
@@ -123,14 +131,14 @@ const ProfilAdmin = () => {
                     style={{
                       boxShadow: "1px 2px 8px rgba(0,0,0,0.15)",
                     }}
-                    src={user}
+                    src={userIMG}
                     className="w-48 h-48 mx-auto rounded-full"
                     alt="photo de profil"
                   />
                 </div>
                 <div className="text-center mt-5">
                   <p className="text-2xl sm:text-3xl font-semibold text-gray-900">
-                    {"sara"}
+                    {user?.prenom}
                   </p>
                   {/* <p
                     title="Admin / software engineering student"
@@ -159,7 +167,7 @@ const ProfilAdmin = () => {
               </div>
               <div className="information flex-1 flex-col justify-center items-center  bg-white w-full sm:w-auto overflow-auto p-2 m-1">
                 <Box className="flex flex-row bg-[#F0F2F5] rounded-xl px-5 py-2 my-3 ">
-                  <img src={user} alt="nom" width={25} height={25} />
+                  <img src={userIMG} alt="nom" width={25} height={25} />
                   {isEditMode ? (
                     <input
                       name="nom"
@@ -174,7 +182,7 @@ const ProfilAdmin = () => {
                       className="text-ellipsis text-nowrap overflow-hidden pl-5"
                       title={"ben foulen"}
                     >
-                      ben foulen
+                      {user?.nom}
                     </Typography>
                   )}
                 </Box>
@@ -214,7 +222,7 @@ const ProfilAdmin = () => {
                       className="text-ellipsis text-nowrap overflow-hidden pl-5"
                       title={"foulenbenfoulen@gmail.com"}
                     >
-                      foulenbenfoulen@gmail.com
+                      {user?.email}
                     </Typography>
                   )}
                 </Box>
@@ -234,7 +242,7 @@ const ProfilAdmin = () => {
                       className="text-ellipsis text-nowrap overflow-hidden pl-5"
                       title={"55555555"}
                     >
-                      55555555
+                      {user?.telephone}
                     </Typography>
                   )}
                 </Box>
@@ -254,7 +262,7 @@ const ProfilAdmin = () => {
                       className="text-ellipsis text-nowrap overflow-hidden pl-5"
                       title={"architecte"}
                     >
-                      architecte
+                      {user?.emploi}
                     </Typography>
                   )}
                 </Box>
@@ -279,7 +287,7 @@ const ProfilAdmin = () => {
                       className="text-ellipsis text-nowrap overflow-hidden pl-5"
                       title={"55 rue de la paix, 1000 Tunis"}
                     >
-                      55 rue de la paix, 1000 Tunis
+                      {user?.adresse}
                     </Typography>
                   )}
                 </Box>
@@ -299,7 +307,7 @@ const ProfilAdmin = () => {
                       className="text-ellipsis text-nowrap overflow-hidden pl-5"
                       title={"22/05/2020"}
                     >
-                      22/05/2020
+                      {user?.dateNaissance}
                     </Typography>
                   )}
                 </Box>

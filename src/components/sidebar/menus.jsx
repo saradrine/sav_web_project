@@ -7,11 +7,11 @@ import group from "../../assets/icons/group.png"
 import dashboard from "../../assets/icons/dashboard.png"
 import teamwork from "../../assets/icons/teamwork.png"
 export const menus = [
-    { name: "Acceuil", link: "/",width:27 , height:27, icon: home, role: 'user' },
-    { name: "Mes véhicules", link: "/my-vehicles",width:27 , height:27, icon: car, role: 'user' },
-    { name: "Nouveau véhicule", link: "/new",width:27 , height:27, icon: add, role: 'user' },
-    { name: "Rendez-vous", link: "/appointment",width:26 , height:26, icon: calendar, role: 'user' },
-    { name: "Mon profil", link: "/profile",width:27 , height:27, icon: user, role: 'user' },
+    { name: "Acceuil", link: "/",width:27 , height:27, icon: home, role: 'client' },
+    { name: "Mes véhicules", link: "/my-vehicles",width:27 , height:27, icon: car, role: 'client' },
+    { name: "Nouveau véhicule", link: "/new",width:27 , height:27, icon: add, role: 'client' },
+    { name: "Rendez-vous", link: "/appointment",width:26 , height:26, icon: calendar, role: 'client' },
+    { name: "Mon profil", link: "/profile",width:27 , height:27, icon: user, role: 'client' },
 
     { name: "Dashboard" ,link: "/dashboard",width:21 , height:21, icon: dashboard, role: 'admin' },
     { name: "Clients", link: "/clients",width:26 , height:26, icon: group, role: 'admin' },
