@@ -33,7 +33,11 @@ const Sidebar = ({role}) => {
         </div>
         <div className="mt-4 flex flex-col gap-4 relative sidebar-link">
           {menus
-            ?.filter((menu) => role && menu.role === role.toLowerCase())
+            ?.filter((menu) =>
+              Array.isArray(menu.role)
+                ? menu.role.includes(role.toLowerCase())
+                : menu.role === role.toLowerCase()
+            )
             .map((menu, i) => {
               return (
                 <NavLink

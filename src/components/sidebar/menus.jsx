@@ -13,10 +13,10 @@ export const menus = [
     { name: "Rendez-vous", link: "/appointment",width:26 , height:26, icon: calendar, role: 'client' },
     { name: "Mon profil", link: "/profile",width:27 , height:27, icon: user, role: 'client' },
 
-    { name: "Dashboard" ,link: "/dashboard",width:21 , height:21, icon: dashboard, role: 'admin' },
-    { name: "Clients", link: "/clients",width:26 , height:26, icon: group, role: 'admin' },
-    { name: "Véhicules" ,link: "/vehicles",width:27 , height:27, icon: car, role: 'admin' },
-    { name: "Demandes" ,link: "/appointments",width:26 , height:26, icon: calendar, role: 'admin' },
-    { name: "Employés", link: "/employees", width: 29, height: 29, icon: teamwork, role: 'admin' },
-    { name: "Mon profil", link: "/profil",width:26 , height:26, icon: user, role: 'admin'}
+    { name: "Dashboard" ,link: "/dashboard",width:21 , height:21, icon: dashboard, role: ['admin', 'superadmin'] },
+    { name: "Clients", link: "/clients",width:26 , height:26, icon: group, role: ['admin', 'superadmin'] },
+    { name: "Véhicules" ,link: "/vehicles",width:27 , height:27, icon: car, role: ['admin', 'superadmin'] },
+    { name: "Demandes" ,link: "/appointments",width:26 , height:26, icon: calendar, role: ['admin', 'superadmin'] },
+    { name: "Employés", link: "/employees", width: 29, height: 29, icon: teamwork, role: ['admin', 'superadmin'] },
+    { name: "Mon profil", link: "/profil",width:26 , height:26, icon: user, role: ['admin', 'superadmin']}
 ];
